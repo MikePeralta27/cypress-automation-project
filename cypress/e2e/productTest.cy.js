@@ -12,7 +12,7 @@ describe('Product page test', () => {
       loginPage.goToLoginPage();
     });
 
-  it('Product page test', () => {
+  it('Add product to cart', () => {
     loginPage.login(data.standard_user, data.password);
     productPage.getProductTitle().should('be.visible');
     productPage.getProductTitle().should('have.text', 'Products');
@@ -23,8 +23,5 @@ describe('Product page test', () => {
     productPage.goToCart();
 
   });
-
-
-  
 
 });

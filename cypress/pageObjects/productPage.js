@@ -8,8 +8,6 @@ export default class ProductPage {
         this.removeButton = "[data-test*='remove']"
         this.cartButton = '[data-test="shopping-cart-link"]'
         this.cartBadge = '.shopping_cart_badge'
-
-
     }
 
 
