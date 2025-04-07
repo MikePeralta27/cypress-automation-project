@@ -1,5 +1,5 @@
-import data from "../fixtures/data.json";
-
+import ProductPage from "./productPage";
+const productPage = new ProductPage();
 
 export default class LoginPage {
     constructor() {
@@ -34,7 +34,19 @@ export default class LoginPage {
             this.getUsernameInput().type(username)
             this.getPasswordInput().type(password)
             this.getLoginButton().click()
+            productPage.getProductTitle().should('be.visible')
         }
+
+        loginWithEmptyCredentials() {
+            this.getLoginButton().click()
+        }
+
+        loginWithOnlyUsername() {
+            this.getUsernameInput().type(Cypress.env('standard_user'))
+            this.getLoginButton().click()
+        }
+        
+
 
 }
 

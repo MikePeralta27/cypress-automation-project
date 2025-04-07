@@ -8,6 +8,10 @@ export default class ProductPage {
         this.removeButton = "[data-test*='remove']"
         this.cartButton = '[data-test="shopping-cart-link"]'
         this.cartBadge = '.shopping_cart_badge'
+        this.menuButton = '#react-burger-menu-btn'
+        this.logoutButton = '[data-test="logout-sidebar-link"]'
+        
+        
     }
 
 
@@ -47,7 +51,7 @@ export default class ProductPage {
         this.getInventoryItem(index).find(this.addButton).click()
     }
 
-    removeFromCart(index) {
+    removeProduct(index) {
         this.getInventoryItem(index).find(this.removeButton).click()
     }
 
@@ -59,6 +63,15 @@ export default class ProductPage {
         this.getCartBadge().should('be.visible')
         this.getCartBadge().should('have.text', num)
 
+    } 
+
+    getLogoutButton() {
+        return cy.get(this.logoutButton)
+    }
+
+    logout() {
+        this.getMenuButton().click()
+        this.getLogoutButton().click()
     }
 
 }
