@@ -27,7 +27,7 @@ export default class LoginPage {
         }
 
         goToLoginPage() {
-            cy.visit('https://www.saucedemo.com/');
+            cy.visit('/');
         }
 
         login(username, password) {
