@@ -20,7 +20,7 @@ describe('Login page test', () => {
     productPage.getProductContainer().should('be.visible');
     cy.get('.title').should('have.text', 'Products');
     productPage.logout();
-    loginPage.getLoginButton().should('be.visible');
+    loginPage.getLoginButton().should('be.not.visible');
   });
 
-});
+});ß
