@@ -19,7 +19,7 @@ describe('Product page test', () => {
   it('Add product to cart', () => {
     
     productPage.addToCart(0);
-    productPage.getRemoveButton().should('be.visible');
+    productPage.getRemoveButton(0).should('be.visible');
     productPage.checkCartBadge(1);
     productPage.goToCart();
     productPage.getCartBadge().should('be.visible');
@@ -28,27 +28,41 @@ describe('Product page test', () => {
 
   });
 
-  it('Add multiple products to cart', () => {
-    productPage.addToCart(0);
-    productPage.addToCart(1);
-    productPage.addToCart(2);
-    productPage.checkCartBadge(3);
-    productPage.getCartBadge().should('be.visible');
-    productPage.getCartBadge().should('have.text', '3');
-    productPage.getInventoryItem(0).should('be.visible');
-    productPage.getInventoryItem(1).should('be.visible');
-    productPage.getInventoryItem(2).should('be.visible');
-  });
-
-
   it('Remove product from cart', () => {
     productPage.addToCart(0);
     productPage.getCartBadge().should('be.visible');
     productPage.getCartBadge().should('have.text', '1');
     productPage.removeProduct(0);
     productPage.getCartBadge().should('not.exist');
-    productPage.getRemoveButton().should('not.exist');
+    productPage.getAddButton(0).should('be.visible');
 
   });
 
+
+  it('Add multiple products to cart', () => {
+    const numProducts = 3;
+    productPage.addMultipleProducts(numProducts);
+    productPage.checkCartBadge(numProducts);
+    productPage.getCartBadge().should('be.visible');
+    productPage.getCartBadge().should('have.text', numProducts);
+    for (let i = 0; i < numProducts; i++) {
+      productPage.getRemoveButton(i).should('be.visible');
+    }
+
+  });
+
+  it('Remove multiple products from cart', () => {
+    const numProducts = 3;
+    productPage.addMultipleProducts(numProducts);
+    productPage.checkCartBadge(numProducts);
+    productPage.removeMultipleProducts(numProducts);
+    productPage.getCartBadge().should('not.exist');
+    for (let i = 0; i < numProducts; i++) {
+      productPage.getAddButton(i).should('be.visible');
+    }
+  });
+
+
+
+ 
 });
