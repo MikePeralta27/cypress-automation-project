@@ -10,6 +10,7 @@ export default class ProductPage {
         this.cartBadge = '.shopping_cart_badge'
         this.menuButton = '#react-burger-menu-btn'
         this.logoutButton = '[data-test="logout-sidebar-link"]'
+
         
         
     }
@@ -30,48 +31,70 @@ export default class ProductPage {
     getInventoryItem(index) {
         return cy.get(this.inventoryItem).eq(index);
     }
+
     
     getCartButton() {
-        return cy.get(this.cartButton)
+        return cy.get(this.cartButton);
     }
 
     getAddButton() {
-        return cy.get(this.addButton)
+        return cy.get(this.addButton);
     }
 
-    getRemoveButton() {
-        return cy.get(this.removeButton)
+    getRemoveButton(index) {
+        return cy.get(this.removeButton).eq(index);
     }
 
     getCartBadge() {
-        return cy.get(this.cartBadge)
+        return cy.get(this.cartBadge);
     }
 
     addToCart(index) {
-        this.getInventoryItem(index).find(this.addButton).click()
+        this.getInventoryItem(index).find(this.addButton).click();
     }
 
     removeProduct(index) {
-        this.getInventoryItem(index).find(this.removeButton).click()
+        this.getInventoryItem(index).find(this.removeButton).click();
     }
 
     goToCart() {
-        this.getCartButton().click()
+        this.getCartButton().click();
+    }
+
+    getMenuButton() {
+        return cy.get(this.menuButton);
     }
 
     checkCartBadge(num) {
-        this.getCartBadge().should('be.visible')
-        this.getCartBadge().should('have.text', num)
+        this.getCartBadge().should('be.visible');
+        this.getCartBadge().should('have.text', num);
 
     } 
 
+    addMultipleProducts(num) {
+        for (let i = 0; i < num; i++) {
+            this.addToCart(i);
+        }
+    }
+
+    removeMultipleProducts(num) {
+        for (let i = 0; i < num; i++) {
+            this.removeProduct(i);
+        }
+    }
+    getInventoryCount() {
+        cy.get(this.inventoryItem).its('length').then((length) => {
+            return length;
+        });
+    }
+
     getLogoutButton() {
-        return cy.get(this.logoutButton)
+        return cy.get(this.logoutButton);
     }
 
     logout() {
-        this.getMenuButton().click()
-        this.getLogoutButton().click()
+        this.getMenuButton().click();
+        this.getLogoutButton().click(); 
     }
 
 }
