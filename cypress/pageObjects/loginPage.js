@@ -31,7 +31,7 @@ export default class LoginPage {
         }
 
         goToLoginPage() {
-            cy.visit('/');
+            commons.goTo('/');
         }
 
         login(username, password) {

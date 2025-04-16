@@ -1,4 +1,9 @@
 export default class Commons {
+
+    goTo(url){
+        cy.visit(url);
+    }
+
     clickElement(selector) {
         cy.get(selector).click();
     }
@@ -10,6 +15,10 @@ export default class Commons {
     typeText(selector, text) {
         cy.get(selector).type(text);
         // this.assertText(selector, text);
+    }
+
+    isVisible(selector){
+        cy.get(selector).should("be.visible"); 
     }
 
 }
