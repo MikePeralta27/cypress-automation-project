@@ -1,5 +1,9 @@
 import ProductPage from "./productPage";
+import Commons from "../utils/commons";
+
 const productPage = new ProductPage();
+const commons = new Commons();
+
 
 export default class LoginPage {
     constructor() {
@@ -31,9 +35,12 @@ export default class LoginPage {
         }
 
         login(username, password) {
-            this.getUsernameInput().type(username);
-            this.getPasswordInput().type(password);
-            this.getLoginButton().click();
+            commons.typeText(this.usernameInput, username);
+            commons.typeText(this.passwordInput, password);
+            commons.clickElement(this.loginButton);
+            // this.getUsernameInput().type(username);
+            // this.getPasswordInput().type(password);
+            // this.getLoginButton().click();
         }
 
         loginWithEmptyCredentials() {
