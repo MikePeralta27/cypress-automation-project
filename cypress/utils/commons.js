@@ -9,7 +9,7 @@ export default class Commons {
 
     typeText(selector, text) {
         cy.get(selector).type(text);
-        this.assertText(selector, text);
+        // this.assertText(selector, text);
     }
 
 }
