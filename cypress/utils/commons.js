@@ -14,11 +14,23 @@ export default class Commons {
 
     typeText(selector, text) {
         cy.get(selector).type(text);
-        // this.assertText(selector, text);
     }
 
-    isVisible(selector){
+    checkElementVisible(selector){
         cy.get(selector).should("be.visible"); 
     }
+
+    checkElementNotVisible(selector){
+        cy.get(selector).should("not.be.visible"); 
+    }
+
+    checkIsEqual(selector, expectedText){
+        cy.get(selector).should("have.text", expectedText);
+    }
+    
+    findElement(selector, index){
+        return cy.get(selector).eq(index);
+    }
+
 
 }
