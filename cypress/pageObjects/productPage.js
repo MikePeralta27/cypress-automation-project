@@ -74,7 +74,7 @@ export default class ProductPage {
   }
 
   checkProductTitleIsVisible(){
-    this.commons.checkElementVisible(this.productName);
+    this.commons.checkElementVisible(this.productTitle);
   }
 
   addMultipleProducts(num) {
