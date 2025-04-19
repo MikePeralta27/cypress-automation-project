@@ -4,53 +4,38 @@ import Commons from "../utils/commons";
 const productPage = new ProductPage();
 const commons = new Commons();
 
-
 export default class LoginPage {
-    constructor() {
-        this.usernameInput = '#user-name';
-        this.passwordInput = '#password';
-        this.loginButton = '#login-button';
-        this.errorMessage = '#login_button_container > div > form > div.error-message-container.error > h3';
+  // Selectors as Getters
+  get usernameInput() { return '#user-name'; }
+  get passwordInput() { return '#password'; }
+  get loginButton() { return '#login-button'; }
+  get errorMessage() { return '#login_button_container > div > form > div.error-message-container.error > h3'; }
 
-    }
+  // Actions
 
-        getUsernameInput() {
-            return cy.get(this.usernameInput);
-        }
+  inputUsername(username) {
+    return commons.typeText(this.usernameInput, username);
+  }
 
-        getPasswordInput() {
-            return cy.get(this.passwordInput);
-        }
+  inputPassword(password) {
+    return commons.typeText(this.passwordInput, password);
+  }
 
-        getLoginButton() {
-            return cy.get(this.loginButton);
-        }
+  clickLoginButton() {
+    return commons.clickElement(this.loginButton);
+  }
 
-        getErrorMessage() {
-            return cy.get(this.errorMessage);
-        }
+  getErrorMessage() {
+    return commons.assertText(this.errorMessage);
+  }
 
-        goToLoginPage() {
-            commons.goTo('/');
-        }
+  goToLoginPage() {
+    commons.goTo('/');
+  }
 
-        login(username, password) {
-            commons.typeText(this.usernameInput, username);
-            commons.typeText(this.passwordInput, password);
-            commons.clickElement(this.loginButton);
-            // this.getUsernameInput().type(username);
-            // this.getPasswordInput().type(password);
-            // this.getLoginButton().click();
-        }
-
-        loginWithEmptyCredentials() {
-            this.getLoginButton().click();
-        }
-
-        loginWithOnlyUsername() {
-            this.getUsernameInput().type(Cypress.env('standard_user'));
-            this.getLoginButton().click();
-        }
-
+  login(username, password) {
+    this.inputUsername(username);
+    this.inputPassword(password);
+    this.clickLoginButton();
+  }
 }
-

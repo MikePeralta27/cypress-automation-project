@@ -2,10 +2,12 @@ import LoginPage from "../pageObjects/loginPage";
 import data from "../fixtures/data.json";
 import ProductPage from "../pageObjects/productPage";
 import CheckoutPage from "../pageObjects/checkoutPage";
+import Commons from "../utils/commons";
 
 const loginPage = new LoginPage();    
 const productPage = new ProductPage();
 const checkoutPage = new CheckoutPage();
+const commons = new Commons();
 
 describe('Product page test', () => {
   
@@ -17,8 +19,7 @@ describe('Product page test', () => {
     });
 
   it('Add product to cart', () => {
-    
-    productPage.addToCart(0);
+    productPage.clickAddToCart(0);
     productPage.getRemoveButton(0).should('be.visible');
     productPage.checkCartBadge(1);
     productPage.goToCart();
@@ -29,10 +30,10 @@ describe('Product page test', () => {
   });
 
   it('Remove product from cart', () => {
-    productPage.addToCart(0);
+    productPage.clickAddToCart(0);
     productPage.getCartBadge().should('be.visible');
     productPage.getCartBadge().should('have.text', '1');
-    productPage.removeProduct(0);
+    productPage.clickRemoveFromCart(0);
     productPage.getCartBadge().should('not.exist');
     productPage.getAddButton(0).should('be.visible');
 
