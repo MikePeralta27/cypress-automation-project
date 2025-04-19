@@ -1,100 +1,100 @@
+import Commons from "../utils/commons";
+
+const commons = new Commons();
+
 export default class ProductPage {
-    constructor() {
-        this.productTitle = '[data-test="title"]'
-        this.productContainer = '.inventory_list'
-        this.productName = '.inventory_item_name'
-        this.inventoryItem = '.inventory_item'
-        this.addButton = '.btn_inventory'
-        this.removeButton = "[data-test*='remove']"
-        this.cartButton = '[data-test="shopping-cart-link"]'
-        this.cartBadge = '.shopping_cart_badge'
-        this.menuButton = '#react-burger-menu-btn'
-        this.logoutButton = '[data-test="logout-sidebar-link"]'
+  // Selectors as Getters
+  get productTitle() { return '[data-test="title"]';}
+  get productContainer() { return '.inventory_list'; }
+  get productName() { return '.inventory_item_name';}
+  get inventoryItem() { return '.inventory_item'; }
+  get addButton() { return '.btn_inventory'; }
+  get removeButton() { return "[data-test*='remove']";}
+  get cartButton() {  return '[data-test="shopping-cart-link"]'; }
+  get cartBadge() { return '.shopping_cart_badge'; }
+  get menuButton() {  return '#react-burger-menu-btn'; }
+  get logoutButton() {  return '[data-test="logout-sidebar-link"]'; }
 
-        
-        
+  // Cypress Actions
+
+  getProductTitle() {
+    return cy.get(this.productTitle);
+  }
+
+  getProductContainer() {
+    return cy.get(this.productContainer);
+  }
+
+  getProductName() {
+    return cy.get(this.productName);
+  }
+
+  getInventoryItem(index) {
+    return cy.get(this.inventoryItem).eq(index);
+  }
+
+  getCartButton() {
+    return cy.get(this.cartButton);
+  }
+
+  getAddButton(index) {
+    return this.getInventoryItem(index).find(this.addButton);
+  }
+
+  getRemoveButton(index) {
+    return this.getInventoryItem(index).find(this.removeButton);
+  }
+
+  getCartBadge() {
+    return cy.get(this.cartBadge);
+  }
+
+  clickAddToCart(index) {
+    this.getAddButton(index).click();
+  }
+
+  clickRemoveFromCart(index) {
+    this.getRemoveButton(index).click();
+  }
+
+  goToCart() {
+    this.getCartButton().click();
+  }
+
+  getMenuButton() {
+    return cy.get(this.menuButton);
+  }
+
+  getLogoutButton() {
+    return cy.get(this.logoutButton);
+  }
+
+  checkCartBadge(num) {
+    this.getCartBadge().should('be.visible').and('have.text', num);
+  }
+
+  checkProductTitleIsVisible(){
+    this.commons.checkElementVisible(this.productName);
+  }
+
+  addMultipleProducts(num) {
+    for (let i = 0; i < num; i++) {
+      this.clickAddToCart(i);
     }
+  }
 
-
-    getProductTitle() {
-        return cy.get(this.productTitle);
+  removeMultipleProducts(num) {
+    for (let i = 0; i < num; i++) {
+      this.clickRemoveFromCart(i);
     }
+  }
 
-    getProductContainer() {
-        return cy.get(this.productContainer);
-    }
+  getInventoryCount() {
+    return cy.get(this.inventoryItem).its('length');
+  }
 
-    getProductName() {
-        return cy.get(this.productName);
-    }
-
-    getInventoryItem(index) {
-        return cy.get(this.inventoryItem).eq(index);
-    }
-
-    
-    getCartButton() {
-        return cy.get(this.cartButton);
-    }
-
-    getAddButton() {
-        return cy.get(this.addButton);
-    }
-
-    getRemoveButton(index) {
-        return cy.get(this.removeButton).eq(index);
-    }
-
-    getCartBadge() {
-        return cy.get(this.cartBadge);
-    }
-
-    addToCart(index) {
-        this.getInventoryItem(index).find(this.addButton).click();
-    }
-
-    removeProduct(index) {
-        this.getInventoryItem(index).find(this.removeButton).click();
-    }
-
-    goToCart() {
-        this.getCartButton().click();
-    }
-
-    getMenuButton() {
-        return cy.get(this.menuButton);
-    }
-
-    checkCartBadge(num) {
-        this.getCartBadge().should('be.visible');
-        this.getCartBadge().should('have.text', num);
-
-    } 
-
-    addMultipleProducts(num) {
-        for (let i = 0; i < num; i++) {
-            this.addToCart(i);
-        }
-    }
-
-    removeMultipleProducts(num) {
-        for (let i = 0; i < num; i++) {
-            this.removeProduct(i);
-        }
-    }
-    getInventoryCount() {
-        cy.get(this.inventoryItem).its('length').then((length) => {
-            return length;
-        });
-    }
-
-    getLogoutButton() {
-        return cy.get(this.logoutButton);
-    }
-
-    logout() {
-        this.getMenuButton().click();
-        this.getLogoutButton().click(); 
-    }
-
+  logout() {
+    commons.clickElement(this.menuButton);
+    commons.clickElement(this.logoutButton);
+  }
 }

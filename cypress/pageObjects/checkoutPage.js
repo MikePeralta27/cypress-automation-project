@@ -1,70 +1,41 @@
 import ProductPage from "./productPage";
+
 const productPage = new ProductPage();
 
 export default class CheckoutPage {
-    constructor() {
-        this.checkoutButton = '[data-test="checkout"]';
-        this.firstNameInput = '[data-test="firstName"]';
-        this.lastNameInput = '[data-test="lastName"]';
-        this.postalCodeInput = '[data-test="postalCode"]';
-        this.cartItem = '[data-test="inventory-item"]';
-        this.continueButton = '[data-test="continue"]';
-        this.cancelButton = '[data-test="cancel"]';
-        this.removeButton = '[data-test*="remove"]';
+  // Selectors as Getters
+  
+    get firstNameInput() { return '[data-test=firstName]'; }
+    get lastNameInput() { return '[data-test=lastName]'; }
+    get postalCodeInput() { return '[data-test=postalCode]'; }
+    get continueButton() { return '[data-test=continue]'; }
+    get cancelButton() { return '[data-test=cancel]'; }
+
+    fillFirstName(name) {
+        cy.get(this.firstNameInput).type(name);
     }
 
-    getCartItem(index) {
-        return cy.get(this.cartItem).eq(index);
+    fillLastName(name) {
+        cy.get(this.lastNameInput).type(name);
     }
 
-    
-    getCheckoutButton() {
-        return cy.get(this.checkoutButton);
+    fillPostalCode(code) {
+        cy.get(this.postalCodeInput).type(code);
     }
 
-    getFirstNameInput() {
-        return cy.get(this.firstNameInput);
+    clickContinue() {
+        cy.get(this.continueButton).click();
     }
 
-    getLastNameInput() {
-        return cy.get(this.lastNameInput);
+    clickCancel() {
+        cy.get(this.cancelButton).click();
     }
 
-    getPostalCodeInput() {
-        return cy.get(this.postalCodeInput);
-    }
 
-    getContinueButton() {
-        return cy.get(this.continueButton);
-    }
+  fillCheckoutForm(firstName, lastName, postalCode) {
+    this.fillFirstName(firstName);
+    this.fillLastName(lastName);
+    this.fillPostalCode(postalCode);
+  }
 
-    getCancelButton() {
-        return cy.get(this.cancelButton);
-    }
-
-    getRemoveButton() {
-        return cy.get(this.removeButton);
-    }
-
-    fillCheckoutForm(firstName, lastName, postalCode) {
-        this.getFirstNameInput().type(firstName);
-        this.getLastNameInput().type(lastName);
-        this.getPostalCodeInput().type(postalCode);
-    }
-
-    removeFromCart(index) {
-        this.getCartItem(index).find(this.removeButton).click();
-    }
-
-    continueCheckout() {
-        this.getContinueButton().click();
-    }   
-
-    cancelCheckout() {
-        this.getCancelButton().click();     
-    }
-    
-    
-    
-    
 }
