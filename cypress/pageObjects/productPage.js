@@ -74,7 +74,7 @@ export default class ProductPage {
   }
 
   checkProductTitleIsVisible(){
-    this.commons.checkElementVisible(this.productName);
+    this.commons.checkElementVisible(this.productTitle);
   }
 
   addMultipleProducts(num) {
@@ -91,6 +91,14 @@ export default class ProductPage {
 
   getInventoryCount() {
     return cy.get(this.inventoryItem).its('length');
+  }
+
+  checkProductSort() {
+    return this.getProductName().then($elements => {
+      const strings = [...$elements].map(el => el.innerText)
+      expect(strings).to.deep.equal([...strings].sort())
+    })
+
   }
 
   logout() {

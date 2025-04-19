@@ -61,14 +61,12 @@ describe('Product page test', () => {
     for (let i = 0; i < numProducts; i++) {
       productPage.getAddButton(i).should('be.visible');
     }
-
-    // it('Check Product elements', () => {
-    //   let item = 0;
-    //   productPage.checkProductTitleIsVisible();
-
-
-    // })
   });
 
- 
-});
+    it('Check Product elements are sorted', () => {
+      let item = 0;
+      // productPage.checkProductTitleIsVisible();
+      productPage.checkProductSort();
+
+    });
+  });
