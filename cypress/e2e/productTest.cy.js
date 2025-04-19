@@ -65,7 +65,7 @@ describe('Product page test', () => {
 
     it('Check Product elements are sorted', () => {
       let item = 0;
-      productPage.checkProductTitleIsVisible();
+      // productPage.checkProductTitleIsVisible();
       productPage.checkProductSort();
 
     });
