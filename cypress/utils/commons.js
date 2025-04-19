@@ -1,31 +1,31 @@
 export default class Commons {
 
     goTo(url){
-        cy.visit(url);
+        return cy.visit(url);
     }
 
     clickElement(selector) {
-        cy.get(selector).click();
+        return cy.get(selector).click();
     }
 
     assertText(selector, expectedText){
-        cy.get(selector).should('have.text', expectedText);
+        return cy.get(selector).should('have.text', expectedText);
     }
 
     typeText(selector, text) {
-        cy.get(selector).type(text);
+        return cy.get(selector).type(text);
     }
 
     checkElementVisible(selector){
-        cy.get(selector).should("be.visible"); 
+        return cy.get(selector).should("be.visible"); 
     }
 
     checkElementNotVisible(selector){
-        cy.get(selector).should("not.be.visible"); 
+        return cy.get(selector).should("not.be.visible"); 
     }
 
     checkIsEqual(selector, expectedText){
-        cy.get(selector).should("have.text", expectedText);
+        return cy.get(selector).should("have.text", expectedText);
     }
     
     findElement(selector, index){
