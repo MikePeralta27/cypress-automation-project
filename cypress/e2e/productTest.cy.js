@@ -60,7 +60,8 @@ describe('Product page test', () => {
     productPage.getCartBadge().should('not.exist');
     for (let i = 0; i < numProducts; i++) {
       productPage.getAddButton(i).should('be.visible');
-    });
+    }
+  });
 
     it('Check Product elements are sorted', () => {
       let item = 0;
