@@ -93,6 +93,14 @@ export default class ProductPage {
     return cy.get(this.inventoryItem).its('length');
   }
 
+  checkProductSort() {
+    return this.getProductName().then($elements => {
+      const strings = [...$elements].map(el => el.innerText)
+      expect(strings).to.deep.equal([...strings].sort())
+    })
+
+  }
+
   logout() {
     commons.clickElement(this.menuButton);
     commons.clickElement(this.logoutButton);

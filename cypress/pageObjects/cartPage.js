@@ -24,7 +24,13 @@ export default class CartPage {
         return commons.clickElement(this.checkoutButton);
     }
 
+    clickContinueShoppingButton(){
+        return commons.clickElement(this.continueShoppingButton);
+    }
+
     checkCartHeaderIsVisible(){
         return commons.checkElementVisible(this.headerContainer);
     }
+
+    
 }
