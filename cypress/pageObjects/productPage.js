@@ -4,45 +4,16 @@ const commons = new Commons();
 
 export default class ProductPage {
   // Selectors as Getters
-  get productTitle() {
-    return '[data-test="title"]';
-  }
-
-  get productContainer() {
-    return '.inventory_list';
-  }
-
-  get productName() {
-    return '.inventory_item_name';
-  }
-
-  get inventoryItem() {
-    return '.inventory_item';
-  }
-
-  get addButton() {
-    return '.btn_inventory';
-  }
-
-  get removeButton() {
-    return "[data-test*='remove']";
-  }
-
-  get cartButton() {
-    return '[data-test="shopping-cart-link"]';
-  }
-
-  get cartBadge() {
-    return '.shopping_cart_badge';
-  }
-
-  get menuButton() {
-    return '#react-burger-menu-btn';
-  }
-
-  get logoutButton() {
-    return '[data-test="logout-sidebar-link"]';
-  }
+  get productTitle() { return '[data-test="title"]';}
+  get productContainer() { return '.inventory_list'; }
+  get productName() { return '.inventory_item_name';}
+  get inventoryItem() { return '.inventory_item'; }
+  get addButton() { return '.btn_inventory'; }
+  get removeButton() { return "[data-test*='remove']";}
+  get cartButton() {  return '[data-test="shopping-cart-link"]'; }
+  get cartBadge() { return '.shopping_cart_badge'; }
+  get menuButton() {  return '#react-burger-menu-btn'; }
+  get logoutButton() {  return '[data-test="logout-sidebar-link"]'; }
 
   // Cypress Actions
 
@@ -100,6 +71,10 @@ export default class ProductPage {
 
   checkCartBadge(num) {
     this.getCartBadge().should('be.visible').and('have.text', num);
+  }
+
+  checkProductTitleIsVisible(){
+    this.commons.checkElementVisible(this.productName);
   }
 
   addMultipleProducts(num) {
