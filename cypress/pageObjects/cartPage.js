@@ -3,7 +3,8 @@ import Commons from "../utils/commons";
 const commons = new Commons();
 
 export default class CartPage {
-
+  // Selectors as Getters
+  
     get headerContainer() { return '[data-test="header-container"]'; }
     get primaryHeader() { return '[data-test="primary-header"]'; }
     get cartTitle() { return '[data-test="title"]'; }

@@ -6,6 +6,7 @@ const commons = new Commons();
 
 export default class LoginPage {
   // Selectors as Getters
+  
   get usernameInput() { return '#user-name'; }
   get passwordInput() { return '#password'; }
   get loginButton() { return '#login-button'; }
