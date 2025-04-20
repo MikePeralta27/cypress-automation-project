@@ -7,6 +7,7 @@ export default class ProductPage {
   get productTitle() { return '[data-test="title"]';}
   get productContainer() { return '.inventory_list'; }
   get productName() { return '.inventory_item_name';}
+  get productPrice() { return '[data-test="inventory-item-price"]';}
   get inventoryItem() { return '.inventory_item'; }
   get addButton() { return '.btn_inventory'; }
   get removeButton() { return "[data-test*='remove']";}
@@ -103,21 +104,22 @@ export default class ProductPage {
     this.getProductTitle().should("be.visible");
   }
 
-  assertProductAscendingSortedByName() {
-    return this.getProductName().then($elements => {
+  assertProductAscendingSorted(selector) {
+    return cy.get(selector).then($elements => {
       const strings = [...$elements].map(el => el.innerText)
       expect(strings).to.deep.equal([...strings].sort())
     });
 
   }
 
-  assertProductDescedingSortedByName() {
-    return this.getProductName().then($elements => {
+  assertProductDescedingSorted(selector) {
+    return cy.get(selector).then($elements => {
       const strings = [...$elements].map(el => el.innerText);
       expect(strings).to.deep.equal([...strings].sort().reverse());
     });
 
   }
+
 
   logout() {
     commons.clickElement(this.menuButton);
