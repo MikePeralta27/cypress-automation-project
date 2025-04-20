@@ -93,9 +93,9 @@ export default class ProductPage {
   getInventoryCount() {
     return cy.get(this.inventoryItem).its('length');
   }
-  
+
   sortProductDecedingByName(){
-    return commons.clickElement(this.sortDropdown)
+    return cy.get(this.sortDropdown)
     .select(1).invoke("val")
     .should("eq", "az")
   }
