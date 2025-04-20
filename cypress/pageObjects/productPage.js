@@ -93,7 +93,7 @@ export default class ProductPage {
     return cy.get(this.inventoryItem).its('length');
   }
 
-  sortProductItems(index, value){
+  sortProductItem(index, value){
     return cy.get(this.sortDropdown)
     .select(index).invoke("val")
     .should("eq", value)

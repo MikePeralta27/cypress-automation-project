@@ -65,21 +65,21 @@ describe('Product page test', () => {
 
     it('Sort Product elements ascending by name', () => {
       productPage.assertProductTitleIsVisible();
-      productPage.sortProductItems(0,"az");
+      productPage.sortProductItem(0,"az");
       productPage.assertProductAscendingSorted(productPage.productName);
 
     });
 
     it('Sort Product elements descending by name', () => {
       productPage.assertProductTitleIsVisible();
-      productPage.sortProductItems(1, "az");
+      productPage.sortProductItem(1, "za");
       productPage.assertProductDescedingSorted(productPage.productName);
 
     });
 
     it('Sort Product elements ascending by price', () => {
       productPage.assertProductTitleIsVisible();
-      productPage.sortProductItems(3, "lohi");
+      productPage.sortProductItem(2, "lohi");
       productPage.assertProductAscendingSorted(productPage.productPrice);
 
     });
