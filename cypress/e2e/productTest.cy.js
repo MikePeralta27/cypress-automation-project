@@ -63,16 +63,17 @@ describe('Product page test', () => {
     }
   });
 
-    it('Check Product elements are sorted acceding by name', () => {
-      productPage.checkProductTitleIsVisible();
-      productPage.assertProductAccendingSorted();
+    it('Sort Product elements ascending by name', () => {
+      productPage.assertProductTitleIsVisible();
+      productPage.sortProductItems(0,"az");
+      productPage.assertProductAscendingSortedByName();
 
     });
 
-    it('Check Product elements are sorted deccending by name', () => {
-      productPage.checkProductTitleIsVisible();
-      productPage.sortProductDecedingByName();
-      productPage.assertProductDeccedingSorted();
+    it('Sort Product elements descending by name', () => {
+      productPage.assertProductTitleIsVisible();
+      productPage.sortProductItems(1, "za");
+      productPage.assertProductDescedingSortedByName();
 
     });
   });

@@ -74,9 +74,7 @@ export default class ProductPage {
     this.getCartBadge().should('be.visible').and('have.text', num);
   }
 
-  checkProductTitleIsVisible(){
-    this.getProductTitle().should("be.visible");
-  }
+ 
 
   addMultipleProducts(num) {
     for (let i = 0; i < num; i++) {
@@ -94,25 +92,30 @@ export default class ProductPage {
     return cy.get(this.inventoryItem).its('length');
   }
 
-  sortProductDecedingByName(){
+  sortProductItems(index, value){
     return cy.get(this.sortDropdown)
-    .select(1).invoke("val")
-    .should("eq", "az")
+    .select(index).invoke("val")
+    .should("eq", value)
   }
 
-  assertProductAccendingSorted() {
+
+  assertProductTitleIsVisible(){
+    this.getProductTitle().should("be.visible");
+  }
+
+  assertProductAscendingSortedByName() {
     return this.getProductName().then($elements => {
       const strings = [...$elements].map(el => el.innerText)
       expect(strings).to.deep.equal([...strings].sort())
-    })
+    });
 
   }
 
-  assertProductDeccedingSorted() {
+  assertProductDescedingSortedByName() {
     return this.getProductName().then($elements => {
-      const strings = [...$elements].map(el => el.innerText)
-      expect(strings).to.deep.equal([...strings].sort().reverse())
-    })
+      const strings = [...$elements].map(el => el.innerText);
+      expect(strings).to.deep.equal([...strings].sort().reverse());
+    });
 
   }
 
