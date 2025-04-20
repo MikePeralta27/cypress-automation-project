@@ -63,10 +63,16 @@ describe('Product page test', () => {
     }
   });
 
-    it('Check Product elements are sorted', () => {
-      let item = 0;
-      // productPage.checkProductTitleIsVisible();
-      productPage.checkProductSort();
+    it('Check Product elements are sorted acceding by name', () => {
+      productPage.checkProductTitleIsVisible();
+      productPage.assertProductAccendingSorted();
+
+    });
+
+    it('Check Product elements are sorted deccending by name', () => {
+      productPage.checkProductTitleIsVisible();
+      productPage.sortProductDecedingByName();
+      productPage.assertProductDeccedingSorted();
 
     });
   });

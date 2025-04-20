@@ -14,6 +14,7 @@ export default class ProductPage {
   get cartBadge() { return '.shopping_cart_badge'; }
   get menuButton() {  return '#react-burger-menu-btn'; }
   get logoutButton() {  return '[data-test="logout-sidebar-link"]'; }
+  get sortDropdown() { return '[data-test="product-sort-container"]'}
 
   // Cypress Actions
 
@@ -74,7 +75,7 @@ export default class ProductPage {
   }
 
   checkProductTitleIsVisible(){
-    this.commons.checkElementVisible(this.productTitle);
+    this.getProductTitle().should("be.visible");
   }
 
   addMultipleProducts(num) {
@@ -92,11 +93,25 @@ export default class ProductPage {
   getInventoryCount() {
     return cy.get(this.inventoryItem).its('length');
   }
+  
+  sortProductDecedingByName(){
+    return commons.clickElement(this.sortDropdown)
+    .select(1).invoke("val")
+    .should("eq", "az")
+  }
 
-  checkProductSort() {
+  assertProductAccendingSorted() {
     return this.getProductName().then($elements => {
       const strings = [...$elements].map(el => el.innerText)
       expect(strings).to.deep.equal([...strings].sort())
+    })
+
+  }
+
+  assertProductDeccedingSorted() {
+    return this.getProductName().then($elements => {
+      const strings = [...$elements].map(el => el.innerText)
+      expect(strings).to.deep.equal([...strings].sort().reverse())
     })
 
   }

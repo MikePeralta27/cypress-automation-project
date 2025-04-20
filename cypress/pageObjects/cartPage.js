@@ -18,6 +18,7 @@ export default class CartPage {
     get itemQuantity() { return '[data-test="item-quantity"]'; }
     get itemTitleLinks() { return '[data-test$="-title-link"]'; }
     get itemPrices() { return '[data-test="inventory-item-price"]'; }
+    get itemNames() { return '[data-test="inventory-item-name"]'}
     get removeButtons() { return '[data-test^="remove-"]'; }
 
     clickCheckoutButton(){
@@ -30,6 +31,14 @@ export default class CartPage {
 
     checkCartHeaderIsVisible(){
         return commons.checkElementVisible(this.headerContainer);
+    }
+    getItemTitleNames(){
+        return cy.get(this.itemNames);
+    
+    }
+
+    getItemTitleName(index){
+        return cy.get(this.itemNames).eq(index);
     }
 
     
