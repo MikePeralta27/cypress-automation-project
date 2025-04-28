@@ -94,9 +94,9 @@ export default class ProductPage {
   }
 
   sortProductItem(index, value){
-    return cy.get(this.sortDropdown)
-    .select(index).invoke("val")
-    .should("eq", value)
+    cy.get(this.sortDropdown).select(index)
+    cy.get(this.sortDropdown).should("have.value", value);
+
   }
 
 
@@ -107,6 +107,7 @@ export default class ProductPage {
   assertProductAscendingSorted(selector) {
     return cy.get(selector).then($elements => {
       const strings = [...$elements].map(el => el.innerText)
+      console.log(strings)
       expect(strings).to.deep.equal([...strings].sort())
     });
 
@@ -115,9 +116,24 @@ export default class ProductPage {
   assertProductDescedingSorted(selector) {
     return cy.get(selector).then($elements => {
       const strings = [...$elements].map(el => el.innerText);
+      console.log(strings)
       expect(strings).to.deep.equal([...strings].sort().reverse());
     });
 
+  }
+
+  assertProductAscendingSortedByPrice(selector){
+    return cy.get(selector).then($elements => {
+        const numbers = [...$elements].map(el => parseFloat(el.innerText.replace('$', '')));
+        expect(numbers).to.deep.equal([...numbers].sort((a, b) => a - b));
+      });
+  }
+
+  assertProductDescendingSortedByPrice(selector) {
+    return cy.get(selector).then($elements => {
+      const numbers = [...$elements].map(el => parseFloat(el.innerText.replace('$', '')));
+      expect(numbers).to.deep.equal([...numbers].sort((a, b) => b - a));
+    });
   }
 
 

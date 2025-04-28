@@ -80,7 +80,14 @@ describe('Product page test', () => {
     it('Sort Product elements ascending by price', () => {
       productPage.assertProductTitleIsVisible();
       productPage.sortProductItem(2, "lohi");
-      productPage.assertProductAscendingSorted(productPage.productPrice);
+      productPage.assertProductAscendingSortedByPrice(productPage.productPrice);
+
+    });
+
+    it('Sort Product elements descending by price', () => {
+      productPage.assertProductTitleIsVisible();
+      productPage.sortProductItem(3, "hilo");
+      productPage.assertProductDescendingSortedByPrice(productPage.productPrice);
 
     });
   });
