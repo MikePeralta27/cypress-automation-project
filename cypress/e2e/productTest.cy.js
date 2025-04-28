@@ -25,8 +25,7 @@ describe('Product page test', () => {
     productPage.goToCart();
     productPage.getCartBadge().should('be.visible');
     productPage.getCartBadge().should('have.text', '1');
-    
-
+  
   });
 
   it('Remove product from cart', () => {
