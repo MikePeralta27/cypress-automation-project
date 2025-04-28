@@ -7,6 +7,7 @@ export default class ProductPage {
   get productTitle() { return '[data-test="title"]';}
   get productContainer() { return '.inventory_list'; }
   get productName() { return '.inventory_item_name';}
+  get productPrice() { return '[data-test="inventory-item-price"]';}
   get inventoryItem() { return '.inventory_item'; }
   get addButton() { return '.btn_inventory'; }
   get removeButton() { return "[data-test*='remove']";}
@@ -14,6 +15,7 @@ export default class ProductPage {
   get cartBadge() { return '.shopping_cart_badge'; }
   get menuButton() {  return '#react-burger-menu-btn'; }
   get logoutButton() {  return '[data-test="logout-sidebar-link"]'; }
+  get sortDropdown() { return '[data-test="product-sort-container"]'}
 
   // Cypress Actions
 
@@ -73,9 +75,7 @@ export default class ProductPage {
     this.getCartBadge().should('be.visible').and('have.text', num);
   }
 
-  checkProductTitleIsVisible(){
-    this.commons.checkElementVisible(this.productName);
-  }
+ 
 
   addMultipleProducts(num) {
     for (let i = 0; i < num; i++) {
@@ -92,6 +92,50 @@ export default class ProductPage {
   getInventoryCount() {
     return cy.get(this.inventoryItem).its('length');
   }
+
+  sortProductItem(index, value){
+    cy.get(this.sortDropdown).select(index)
+    cy.get(this.sortDropdown).should("have.value", value);
+
+  }
+
+
+  assertProductTitleIsVisible(){
+    this.getProductTitle().should("be.visible");
+  }
+
+  assertProductAscendingSorted(selector) {
+    return cy.get(selector).then($elements => {
+      const strings = [...$elements].map(el => el.innerText)
+      console.log(strings)
+      expect(strings).to.deep.equal([...strings].sort())
+    });
+
+  }
+
+  assertProductDescedingSorted(selector) {
+    return cy.get(selector).then($elements => {
+      const strings = [...$elements].map(el => el.innerText);
+      console.log(strings)
+      expect(strings).to.deep.equal([...strings].sort().reverse());
+    });
+
+  }
+
+  assertProductAscendingSortedByPrice(selector){
+    return cy.get(selector).then($elements => {
+        const numbers = [...$elements].map(el => parseFloat(el.innerText.replace('$', '')));
+        expect(numbers).to.deep.equal([...numbers].sort((a, b) => a - b));
+      });
+  }
+
+  assertProductDescendingSortedByPrice(selector) {
+    return cy.get(selector).then($elements => {
+      const numbers = [...$elements].map(el => parseFloat(el.innerText.replace('$', '')));
+      expect(numbers).to.deep.equal([...numbers].sort((a, b) => b - a));
+    });
+  }
+
 
   logout() {
     commons.clickElement(this.menuButton);

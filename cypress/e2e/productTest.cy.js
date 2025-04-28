@@ -61,14 +61,33 @@ describe('Product page test', () => {
     for (let i = 0; i < numProducts; i++) {
       productPage.getAddButton(i).should('be.visible');
     }
-
-    // it('Check Product elements', () => {
-    //   let item = 0;
-    //   productPage.checkProductTitleIsVisible();
-
-
-    // })
   });
 
- 
-});
+    it('Sort Product elements ascending by name', () => {
+      productPage.assertProductTitleIsVisible();
+      productPage.sortProductItem(0,"az");
+      productPage.assertProductAscendingSorted(productPage.productName);
+
+    });
+
+    it('Sort Product elements descending by name', () => {
+      productPage.assertProductTitleIsVisible();
+      productPage.sortProductItem(1, "za");
+      productPage.assertProductDescedingSorted(productPage.productName);
+
+    });
+
+    it('Sort Product elements ascending by price', () => {
+      productPage.assertProductTitleIsVisible();
+      productPage.sortProductItem(2, "lohi");
+      productPage.assertProductAscendingSortedByPrice(productPage.productPrice);
+
+    });
+
+    it('Sort Product elements descending by price', () => {
+      productPage.assertProductTitleIsVisible();
+      productPage.sortProductItem(3, "hilo");
+      productPage.assertProductDescendingSortedByPrice(productPage.productPrice);
+
+    });
+  });
