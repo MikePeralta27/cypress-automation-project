@@ -29,6 +29,8 @@ describe('Login page test', () => {
     cartPage.clickCheckoutButton();
     checkoutPage.fillCheckoutForm("Michael", "Test", 80120);
     checkoutPage.clickContinue();
+    checkoutPage.clickFinish();
+    commons.checkElementVisible(checkoutPage.completeHeader);
     productPage.logout();
     commons.checkElementVisible(loginPage.loginButton);
   });
