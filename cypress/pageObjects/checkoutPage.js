@@ -40,7 +40,7 @@ export default class CheckoutPage {
     }
 
     clickFinish() {
-      cy.get(this.finishButton).clikc();
+      cy.get(this.finishButton).click();
       
     }
 
